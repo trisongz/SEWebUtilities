@@ -1,22 +1,22 @@
-import urllib2
+import urllib3
 from xml.dom.minidom import parseString
+http = urllib3.PoolManager()
 
 def get_google_new_results( term, count ):
     results = []
-    obj = parseString( urllib2.urlopen('http://news.google.com/news?q=%s&output=rss' % term).read() )
+    obj = parseString(http.request('GET','https://news.google.com/news?q=%s&output=rss' % term).data)
 
     elements = obj.getElementsByTagName('title')[2:] # To get rid of unwanted title elements in XML doc    
     links = obj.getElementsByTagName('link')[2:]
-    print links
-    for element in elements[:count]:
-        headline =  element.childNodes[0].data
-        for link in links:
-            url = link.childNodes[0].data.split('=')[-1]
-        newssearch = url
-        results.append( newssearch )
 
+    for i in range(count if len(elements) > count else len(elements)):
+      headline = elements[i].childNodes[0].data
+      url = links[i].childNodes[0].data.split('=')[-1]
+      newssearch = headline + ' -> ' + url
+      results.append( newssearch )
     return results
 
-items = get_google_new_results( newskeyword, 7 )
+
+items = get_google_new_results( 'marketing+ai', 5 )
 for i,e in enumerate(items):
-    print '%d: %s' % (i+1,e,)
+    print('%d: %s' % (i+1,e,))
