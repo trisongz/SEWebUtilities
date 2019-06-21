@@ -77,13 +77,13 @@ class Yahoo(Search):
     '''Searches yahoo.com'''
     def __init__(self, proxy=cfg.proxy, timeout=cfg.timeout):
         super(Yahoo, self).__init__(proxy, timeout)
-        self._base_url = 'https://uk.search.yahoo.com'
+        self._base_url = 'https://search.yahoo.com/'
         self._name = 'Yahoo'
     
     def _selectors(self, element):
         '''Returns the appropriate CSS selector.'''
         selectors = {
-            'url': 'div.compTitle.options-toggle div span', 
+            'url': 'div.compTitle.options-toggle a.ac-algo', 
             'title': 'h3.title', 
             'text': 'div.compText.aAbs p', 
             'links': 'div#main div#web li div.dd.algo.algo-sr.Sr', 
