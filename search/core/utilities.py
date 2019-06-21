@@ -129,7 +129,7 @@ def print_results(engines):
     '''Prints the results.'''
     for engine in engines:
         console(engine._name + u' results') 
-        for i, v in enumerate(engine.results, 1):
+        #for i, v in enumerate(engine.results, 1):
             console(u'{:<3}{}'.format(i, v['link'])) 
         console(u' ')
 
