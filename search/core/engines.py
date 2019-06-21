@@ -83,7 +83,7 @@ class Yahoo(Search):
     def _selectors(self, element):
         '''Returns the appropriate CSS selector.'''
         selectors = {
-            'url': 'div.compTitle.options-toggle a[href]', 
+            'url': 'div.compTitle.options-toggle h3.title a.ac-algo[href]', 
             'title': 'h3.title', 
             'text': 'div.compText.aAbs p', 
             'links': 'div#main div#web li div.dd.algo.algo-sr.Sr', 
